@@ -32,9 +32,9 @@ func (h *handlerTopping) FindToppings(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(err.Error())
 	}
 
-	for i, p := range toppings {
-		toppings[i].Image = pathfile + p.Image
-	}
+	// for i, p := range toppings {
+	// 	toppings[i].Image = pathfile + p.Image
+	// }
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: toppings}
@@ -55,7 +55,7 @@ func (h *handlerTopping) GetTopping(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	topping.Image = path_file + topping.Image
+	// topping.Image = os.Getenv("PATH_FILE") + topping.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: topping}

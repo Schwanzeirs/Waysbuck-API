@@ -18,8 +18,6 @@ type handlerProfile struct {
 	ProfileRepository repositories.ProfileRepository
 }
 
-var profileimage = "http://localhost:5000/uploads/"
-
 func HandlerProfile(ProfileRepository repositories.ProfileRepository) *handlerProfile {
 	return &handlerProfile{ProfileRepository}
 }
@@ -36,9 +34,9 @@ func (h *handlerProfile) FindProfile(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(err.Error())
 	}
 
-	for i, p := range profiles {
-		profiles[i].Image = profileimage + p.Image
-	}
+	// for i, p := range profiles {
+	// 	profiles[i].Image = os.Getenv("PATH_FILE") + p.Image
+	// }
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: profiles}
@@ -59,7 +57,7 @@ func (h *handlerProfile) GetProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	profile.Image = profileimage + profile.Image
+	// profile.Image = os.Getenv("PATH_FILE") + profile.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: profile}

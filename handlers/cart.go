@@ -22,8 +22,6 @@ func HandlerCart(CartRepository repositories.CartRepository) *handlerCart {
 	return &handlerCart{CartRepository}
 }
 
-var transimg = "http://localhost:5000/uploads/"
-
 func (h *handlerCart) FindCarts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -43,10 +41,10 @@ func (h *handlerCart) FindCarts(w http.ResponseWriter, r *http.Request) {
 		responseCart = append(responseCart, convertResponseCart(t))
 	}
 
-	for i, t := range responseCart {
-		imagePath := transimg + t.Product.Image
-		responseCart[i].Product.Image = imagePath
-	}
+	// for i, t := range responseCart {
+	// 	imagePath := os.Getenv("PATH_FILE") + t.Product.Image
+	// 	responseCart[i].Product.Image = imagePath
+	// }
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: responseCart}
@@ -253,9 +251,9 @@ func (h *handlerCart) FindCartsByTrans(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 	}
 
-	for i, t := range cart {
-		cart[i].Product.Image = transimg + t.Product.Image
-	}
+	// for i, t := range cart {
+	// 	cart[i].Product.Image = os.Getenv("PATH_FILE") + t.Product.Image
+	// }
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: cart}
