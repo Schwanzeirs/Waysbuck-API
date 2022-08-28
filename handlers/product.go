@@ -87,6 +87,7 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	request := productdto.ProductRequest{
 		Title: r.FormValue("title"),
 		Price: price,
+		Image: filepath,
 	}
 
 	validation := validator.New()
@@ -100,14 +101,14 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 
 	// Declare Context Background, Cloud Name, API Key, API Secret ...
 	var ctx = context.Background()
-	// var CLOUD_NAME = os.Getenv("CLOUD_NAME")
-	// var API_KEY = os.Getenv("API_KEY")
-	// var API_SECRET = os.Getenv("API_SECRET")
-	var CLOUDINARY_URL = os.Getenv("CLOUDINARY_URL")
+	var CLOUD_NAME = os.Getenv("CLOUD_NAME")
+	var API_KEY = os.Getenv("API_KEY")
+	var API_SECRET = os.Getenv("API_SECRET")
+	// var CLOUDINARY_URL = os.Getenv("CLOUDINARY_URL")
 
 	// Add your Cloudinary credentials ...
-	// cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
-	cld, _ := cloudinary.NewFromURL(CLOUDINARY_URL)
+	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
+	// cld, _ := cloudinary.NewFromURL(CLOUDINARY_URL)
 
 	// Upload file to Cloudinary ...
 	// add new test
