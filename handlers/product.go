@@ -108,6 +108,7 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
+	// add new test
 	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "waysbuck"})
 
 	if err != nil {
